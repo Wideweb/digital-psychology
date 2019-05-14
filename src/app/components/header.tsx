@@ -1,7 +1,9 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-interface HeaderProps {};
+interface HeaderProps {
+    onOpen: Function;
+};
 
 const Container = styled.header`
     grid-area: header;
@@ -45,6 +47,10 @@ const Link = styled.a`
 `;
 
 class HeaderComponent extends React.Component<HeaderProps, {}> {
+    _open(to) {
+        this.props.onOpen(to);
+    }
+
     render() {
         return (
             <Container>
@@ -52,8 +58,8 @@ class HeaderComponent extends React.Component<HeaderProps, {}> {
                     <li></li>
                 </MenuLeft>
                 <MenuRight>
-                    <Link>Login</Link>
-                    <Link>Sign In</Link>
+                    <Link onClick={() => this._open('/login')}>Login</Link>
+                    <Link onClick={() => this._open('/sign-in')}>Sign In</Link>
                 </MenuRight>
             </Container>
         )

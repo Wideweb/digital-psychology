@@ -1,10 +1,16 @@
 import * as React from 'react';
 import { PatientListItem } from '../types';
+import styled from 'styled-components';
 
 interface IPatientListItemProps {
     data: PatientListItem;
     onOpen: Function;
 }
+
+const Constainer = styled.div`
+    box-sizing: border-box;
+    padding: 20px;
+`;
 
 export default class PatientListItemComponent extends React.Component<IPatientListItemProps, {}> {
     constructor(props: IPatientListItemProps) {
@@ -19,7 +25,7 @@ export default class PatientListItemComponent extends React.Component<IPatientLi
 
     render() {
         return (
-            <div onClick={this._open}>{this.props.data.name}</div>
+            <Constainer onClick={this._open}>{this.props.data.name}</Constainer>
         );
     }
 }

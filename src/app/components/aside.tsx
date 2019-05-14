@@ -1,7 +1,9 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-interface AsideProps {};
+interface AsideProps {
+    onOpen: Function;
+};
 
 const Container = styled.aside`
     grid-area: aside;
@@ -25,12 +27,16 @@ const Link = styled.a`
 `;
 
 class AsideComponent extends React.Component<AsideProps, {}> {
+    _open(to) {
+        this.props.onOpen(to);
+    }
+
     render() {
         return (
             <Container>
-                <Link>Home</Link>
-                <Link>Patients</Link>
-                <Link>Settings</Link>
+                <Link onClick={() => this._open('/')}>Home</Link>
+                <Link onClick={() => this._open('/patients')}>Patients</Link>
+                <Link onClick={() => this._open('/settings')}>Settings</Link>
             </Container>
         )
     }

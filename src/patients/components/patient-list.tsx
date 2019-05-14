@@ -14,12 +14,6 @@ const Container = styled.div`
     flex-direction: column;
 `;
 
-const Row = styled.div`
-    box-sizing: border-box;
-    padding: 20px;
-`;
-
-
 class PatientListComponent extends React.Component<IPatientListProps> {
     constructor(props: IPatientListProps) {
         super(props);
@@ -37,7 +31,7 @@ class PatientListComponent extends React.Component<IPatientListProps> {
         return (
             <Container>
                 {patients.map((patient) => 
-                    <Row key={patient.id}><PatientListItemComponent data={patient} onOpen={patient => this._openPatient(patient)}/></Row>
+                    <PatientListItemComponent key={patient.id} data={patient} onOpen={patient => this._openPatient(patient)}/>
                 )}
             </Container>
         );

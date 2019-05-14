@@ -39,13 +39,23 @@ const Container = styled.div`
 `;
 
 class AppComponent extends React.Component<AppProps, {}> {
+    constructor(props: AppProps) {
+        super(props);
+
+        this._openPage = this._openPage.bind(this);
+    }
+
+    _openPage(to) {
+        history.push(to);
+    }
+
     render() {
         return (
             <Provider store={store}>
                 <Router history={history}>
                     <Container>
-                        <HeaderComponent></HeaderComponent>
-                        <AsideComponent></AsideComponent>
+                        <HeaderComponent onOpen={this._openPage}></HeaderComponent>
+                        <AsideComponent onOpen={this._openPage}></AsideComponent>
                         <BodyComponent></BodyComponent>
                         <FooterComponent></FooterComponent>
                     </Container>

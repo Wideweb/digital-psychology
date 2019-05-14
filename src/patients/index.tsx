@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import {
     getPatients,
 } from './reducers/patients';
-import { Container } from './atoms';
 import PatientListComponent from './components/patient-list';
 
 interface IPatientsProps {
@@ -22,12 +21,11 @@ class PatientsComponent extends React.Component<IPatientsProps, {}> {
     }
 
     componentDidMount() {
-        console.log(this.props.history);
         this.props.getPatients();
     }
 
     render() {
-        return (<Container>{this._renderPatients()}</Container>)
+        return (<div>{this._renderPatients()}</div>)
     }
 
     _renderPatients() {
@@ -49,7 +47,6 @@ class PatientsComponent extends React.Component<IPatientsProps, {}> {
     }
 
     _openPatient(patient) {
-        console.log(patient);
         this.props.history.push(`/patients/${patient.id}`);
     }
 }

@@ -1,11 +1,24 @@
 import * as React from 'react';
 import { PatientListItem } from '../types';
 import PatientListItemComponent from './patient-list-item';
+import styled from 'styled-components';
 
 interface IPatientListProps {
     data: Array<PatientListItem>;
     onOpenPatient: Function;
 }
+
+const Container = styled.div`
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+`;
+
+const Row = styled.div`
+    box-sizing: border-box;
+    padding: 20px;
+`;
+
 
 class PatientListComponent extends React.Component<IPatientListProps> {
     constructor(props: IPatientListProps) {
@@ -22,11 +35,11 @@ class PatientListComponent extends React.Component<IPatientListProps> {
         const patients = this.props.data;
 
         return (
-            <ul>
+            <Container>
                 {patients.map((patient) => 
-                    <li key={patient.id}><PatientListItemComponent data={patient} onOpen={patient => this._openPatient(patient)}/></li>
+                    <Row key={patient.id}><PatientListItemComponent data={patient} onOpen={patient => this._openPatient(patient)}/></Row>
                 )}
-            </ul>
+            </Container>
         );
     }
 }

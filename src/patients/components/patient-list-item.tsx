@@ -1,7 +1,8 @@
 import * as React from 'react';
+import { PatientListItem } from '../types';
 
 interface IPatientListItemProps {
-    data: any;
+    data: PatientListItem;
     onOpen: Function;
 }
 

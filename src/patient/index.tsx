@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import {
     getPatient,
 } from './reducers/patient';
-import { Container } from './atoms';
 import { Patient } from './types';
+import PatientCallsComponent from './components/patient-calls';
+import PatientMessagesComponent from './components/patient-messages';
 
 interface IPatientsProps {
     getPatient: Function;
@@ -21,7 +22,7 @@ class PatientComponent extends React.Component<IPatientsProps, {}> {
     }
 
     render() {
-        return (<Container>{this._renderPatient()}</Container>)
+        return (<div>{this._renderPatient()}</div>)
     }
 
     _renderPatient() {
@@ -38,9 +39,18 @@ class PatientComponent extends React.Component<IPatientsProps, {}> {
         }
 
         return (
-            <div className="row">
-                <label>Name</label>
-                <span>{ this.props.patient.name }</span>
+            <div className="container">
+                <div className="row">
+                    <h1>{ this.props.patient.name }</h1>
+                </div>
+                <div className="row">
+                    <h2>Calls</h2>
+                    <PatientCallsComponent data={this.props.patient.calls}></PatientCallsComponent>
+                </div>
+                <div className="row">
+                    <h2>Messages</h2>
+                    <PatientMessagesComponent data={this.props.patient.calls}></PatientMessagesComponent>
+                </div>
             </div>
         );
     }

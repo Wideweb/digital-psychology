@@ -1,12 +1,5 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import glamorous from 'glamorous';
-
-export const Container = glamorous.div({
-    width: '100px',
-    height: '100px',
-    backgroundColor: 'red',
-});
 
 
 interface ILoginComponentProps {
@@ -46,7 +39,7 @@ class LoginComponent extends React.Component<ILoginComponentProps, ILoginCompone
 
     render() {
         return (
-            <Container>
+            <div>
                 <head>
                     Login
                 </head>
@@ -63,7 +56,7 @@ class LoginComponent extends React.Component<ILoginComponentProps, ILoginCompone
                     </ul>
                     <input type="submit" value="Submit" />
                 </form>
-            </Container>
+            </div>
         );
     }
 }

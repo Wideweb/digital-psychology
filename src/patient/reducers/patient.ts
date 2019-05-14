@@ -9,7 +9,7 @@ export const initState: PatientState = {
     isLoading: false,
     isFail: false,
     error: null,
-    data: {} as Patient,
+    data: new Patient(),
 }
 
 const reducer: Reducer<PatientState> = (state = initState, action) => {

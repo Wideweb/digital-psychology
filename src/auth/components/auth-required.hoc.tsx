@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Component } from 'react';
 import { Redirect  } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Container } from '../atoms';
 
 import { User } from '../types';
 
@@ -32,11 +31,11 @@ export default function requiresAuth(WrappedComponent) {
 
         render() {
             return (
-                <Container>
+                <div>
                     {this.props.user 
                         ? <WrappedComponent {...this.props} /> 
                         : <Redirect to={{ pathname: "/login" }}/>}
-                </Container>
+                </div>
             );
         }
     }

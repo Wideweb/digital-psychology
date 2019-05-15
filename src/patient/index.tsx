@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
 import {
     getPatient,
 } from './reducers/patient';
 import { Patient } from './types';
 import PatientCallsComponent from './components/patient-calls';
 import PatientMessagesComponent from './components/patient-messages';
+import PatientPanelComponent from './components/patient-panel';
 
 interface IPatientsProps {
     getPatient: Function;
@@ -15,6 +17,21 @@ interface IPatientsProps {
     match: any;
 }
 
+const Container = styled.div`
+    height: 100%;
+    width: 100%;
+    display: flex;
+	flex-direction: row;
+	overflow: hidden;
+`;
+
+const Details = styled.div`
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	overflow: auto;
+`;
+
 class PatientComponent extends React.Component<IPatientsProps, {}> {
     componentDidMount() {
         const { id } = this.props.match.params;
@@ -22,37 +39,15 @@ class PatientComponent extends React.Component<IPatientsProps, {}> {
     }
 
     render() {
-        return (<div>{this._renderPatient()}</div>)
-    }
-
-    _renderPatient() {
-        if (this.props.isLoading) {
-            return (
-                'Loading...'
-            )
-        }
-
-        if (this.props.isFail) {
-            return (
-                'Fail'
-            )
-        }
-
         return (
-            <div className="container">
-                <div className="row">
-                    <h1>{ this.props.patient.name }</h1>
-                </div>
-                <div className="row">
-                    <h2>Calls</h2>
-                    <PatientCallsComponent data={this.props.patient.calls}></PatientCallsComponent>
-                </div>
-                <div className="row">
-                    <h2>Messages</h2>
-                    <PatientMessagesComponent data={this.props.patient.calls}></PatientMessagesComponent>
-                </div>
-            </div>
-        );
+			<Container>
+				<PatientPanelComponent data={this.props.patient}></PatientPanelComponent>
+				<Details>
+					<PatientCallsComponent data={this.props.patient.calls}></PatientCallsComponent>
+					<PatientMessagesComponent data={this.props.patient.messages}></PatientMessagesComponent>
+				</Details>
+			</Container>
+		);
     }
 }
 

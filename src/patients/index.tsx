@@ -4,6 +4,7 @@ import {
     getPatients,
 } from './reducers/patients';
 import PatientListComponent from './components/patient-list';
+import styled from 'styled-components';
 
 interface IPatientsProps {
     getPatients: Function;
@@ -12,6 +13,13 @@ interface IPatientsProps {
     isFail: boolean;
     history: any;
 }
+
+const Container = styled.div`
+    height: 100%;
+    width: 100%;
+	box-sizing: border-box;
+	overflow: hidden;
+`;
 
 class PatientsComponent extends React.Component<IPatientsProps, {}> {
     constructor(props: IPatientsProps) {
@@ -25,7 +33,7 @@ class PatientsComponent extends React.Component<IPatientsProps, {}> {
     }
 
     render() {
-        return (<div>{this._renderPatients()}</div>)
+        return (<Container>{this._renderPatients()}</Container>)
     }
 
     _renderPatients() {

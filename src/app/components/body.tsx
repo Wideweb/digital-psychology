@@ -11,7 +11,7 @@ interface BodyProps {};
 
 const Container = styled.main`
     grid-area: body;
-    overflow: auto;
+	overflow: hidden;
 `;
 
 class BodyComponent extends React.Component<BodyProps, {}> {

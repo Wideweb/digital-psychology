@@ -1,6 +1,8 @@
 export class PatientListItem {
-    id: number;
+    id: string;
+    number: number;
     name: string;
+    age: number
 }
 
 export interface PatientsState {

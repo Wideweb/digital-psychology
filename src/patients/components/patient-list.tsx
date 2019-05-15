@@ -10,8 +10,43 @@ interface IPatientListProps {
 
 const Container = styled.div`
     height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
+`;
+
+const HeaderRow = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+`;
+
+const HeaderCell = styled.div`
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 20px;
+`;
+
+const BodyRow = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+
+    &:hover {
+        background: #e6604c;
+    }
+`;
+
+const BodyCell = styled.div`
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 20px;
 `;
 
 class PatientListComponent extends React.Component<IPatientListProps> {
@@ -30,8 +65,11 @@ class PatientListComponent extends React.Component<IPatientListProps> {
 
         return (
             <Container>
+                <HeaderRow><HeaderCell>Number</HeaderCell><HeaderCell>Patient Name</HeaderCell><HeaderCell>Age</HeaderCell></HeaderRow>
                 {patients.map((patient) => 
-                    <PatientListItemComponent key={patient.id} data={patient} onOpen={patient => this._openPatient(patient)}/>
+                    <BodyRow key={patient.id}>
+                        <BodyCell>{patient.number}</BodyCell><BodyCell>{patient.name}</BodyCell><BodyCell>{patient.age}</BodyCell>
+                    </BodyRow>
                 )}
             </Container>
         );

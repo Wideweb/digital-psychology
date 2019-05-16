@@ -55,12 +55,12 @@ class AppComponent extends React.Component<AppProps, {}> {
                 <Router history={history}>
                     <Container>
                         <HeaderComponent onOpen={this._openPage}></HeaderComponent>
-                        <AsideComponent onOpen={this._openPage}></AsideComponent>
+                        <AsideComponent onOpen={this._openPage} location={history.location.pathname}></AsideComponent>
                         <BodyComponent></BodyComponent>
                         <FooterComponent></FooterComponent>
                     </Container>
                 </Router>
-            </Provider >
+            </Provider>
         );
     }
 }

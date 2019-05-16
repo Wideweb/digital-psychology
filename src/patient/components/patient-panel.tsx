@@ -13,7 +13,7 @@ const Container = styled.div`
     overflow: hidden;
     box-sizing: border-box;
     padding: 20px 10px;
-    box-shadow: 5px 0 5px -5px #333;
+    border-right: 1px solid #333;
 `;
 
 const Avatar = styled.div`

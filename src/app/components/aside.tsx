@@ -2,7 +2,8 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 interface AsideProps {
-    onOpen: Function;
+	onOpen: Function;
+	location: string;
 };
 
 const Container = styled.aside`
@@ -15,7 +16,8 @@ const Container = styled.aside`
 
 const Link = styled.a`
     color: white;
-    background-color: #2f343b;
+	background-color: #2f343b;
+	text-transform: uppercase;
     padding: 10px;
     cursor: pointer;
     &:hover {
@@ -29,17 +31,32 @@ const Link = styled.a`
 class AsideComponent extends React.Component<AsideProps, {}> {
     _open(to) {
         this.props.onOpen(to);
-    }
+	}
+	
+	_isActive(path) {
+		return path === this.props.location;
+	}
 
     render() {
         return (
             <Container>
-                <Link onClick={() => this._open('/')}>Home</Link>
-                <Link onClick={() => this._open('/patients')}>Patients</Link>
-                <Link onClick={() => this._open('/settings')}>Settings</Link>
+				{this._renderLink('/', 'Home')}
+				{this._renderLink('/patients', 'Patients')}
+				{this._renderLink('/settings', 'Settings')}
             </Container>
         )
-    }
+	}
+	
+	_renderLink(path, label) {
+		return (
+			<Link 
+				className={(this._isActive(path) ? 'active' : '')}
+				onClick={() => this._open(path)}
+			>
+				{label}
+			</Link>
+		);
+	}
 }
 
 export default AsideComponent;

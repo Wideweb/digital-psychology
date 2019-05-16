@@ -15,7 +15,6 @@ class PatientMessagesComponent extends React.Component<IPatientListProps> {
     render() {
         return (
 			<Container>
-				<h1>Messages</h1>
 				<FlexibleWidthXYPlot
 					height={500}
 					xType="ordinal" 
@@ -25,10 +24,15 @@ class PatientMessagesComponent extends React.Component<IPatientListProps> {
 					<XAxis tickFormat={v => format(+v, 'dd mmm')} style={{
 						line: {stroke: '#ADDDE1'},
 						ticks: {stroke: '#ADDDE1'},
-						text: {stroke: 'none', fill: '#6b6b76', fontWeight: 600}
+						text: {stroke: 'none', fill: '#6b6b76', fontWeight: 600, fontSize: '13px'},
 					}}/>
-					<YAxis/>
-					<VerticalBarSeries data={this.props.data.map(item => ({ x: item.date, y: item.num }))} />
+					<YAxis style={{
+						text: {fontSize: '13px'},
+					}}/>
+					<VerticalBarSeries 
+						data={this.props.data.map(item => ({ x: item.date, y: item.num }))} 
+						style={{ fill: '#4682B4', stroke: 'none' }}
+					/>
 				</FlexibleWidthXYPlot>
 			</Container>
         );

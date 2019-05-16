@@ -44,7 +44,7 @@ const Body = styled.div`
 	display: flex;
 	flex-direction: column;
 	flex: 1;
-	overflow: auto;
+	overflow-y: scroll;
 `;
 
 const BodyRow = styled.div`

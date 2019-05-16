@@ -7,16 +7,35 @@ interface IPatientPanelProps {
 }
 
 const Container = styled.div`
-    width: 100px;
+    width: 200px;
     display: flex;
 	flex-direction: column;
-	overflow: hidden;
+    overflow: hidden;
+    box-sizing: border-box;
+    padding: 20px 10px;
+    border-right: 1px solid black;
+`;
+
+const Avatar = styled.div`
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    background: grey;
+    align-self: center;
+    margin: 0 0 10px 0;
+`;
+
+const Name = styled.div`
+    align-self: center;
 `;
 
 class PatientPanelComponent extends React.Component<IPatientPanelProps> {
     render() {
         return (
-			<Container>{this.props.data.name}</Container>
+            <Container>
+                <Avatar></Avatar>
+                <Name>{this.props.data.name}</Name>
+            </Container>
         );
     }
 }

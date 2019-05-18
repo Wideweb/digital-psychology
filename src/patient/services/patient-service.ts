@@ -1,4 +1,4 @@
-import { Patient, PatientCall, PatientMessage, PatientHeartRate} from '../types';
+import { Patient, PatientCall, PatientMessage, PatientHeartRate, PatientLocation} from '../types';
 
 const ONE_DAY = 86400000;
 const ONE_HOUR = 60 * 60;
@@ -34,11 +34,13 @@ const patient = {
         { date: Date.now() - ONE_DAY * 2, num: 3 } as PatientMessage,
         { date: Date.now() - ONE_DAY * 1, num: 1 } as PatientMessage,
 	],
-	heartRate: [],
+	gps: [
+		{ lat: 59.95, lng: 30.33 } as PatientLocation, 
+	],
 } as Patient
 
 export async function getPatientAsync(): Promise<Patient> {
-	patient.heartRate = [...Array(1000).keys()]
+	patient.heartRate = [...Array(3000).keys()]
 		.reverse()
 		.map(x => ({ 
 			date: Date.now() - 60 * 1000 * x, 

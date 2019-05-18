@@ -1,5 +1,5 @@
 import * as React from 'react';
-import DatePicker from "react-datepicker";
+import DatePicker from 'react-datepicker';
 import format from 'dateformat';
 import styled from 'styled-components';
 import { FlexibleWidthXYPlot, VerticalGridLines, HorizontalGridLines, XAxis, YAxis, LineSeries } from 'react-vis';
@@ -28,17 +28,16 @@ const Field = styled.div`
 `;
 
 const Label = styled.div`
-	margin: 0 5px 0 0;
+	font-size: 14px;
+	margin: 0 0 5px 0;
 `;
-
-const ticks = [...Array(12).keys()].reverse().map(x => Date.now() - 60 * 60 * 1000 * x - new Date().getMinutes() * 60 * 1000);
 
 class PatientHeartRateComponent extends React.Component<IPatientHeartRateProps, IPatientHeartRateState> {
 	constructor(props: IPatientHeartRateProps) {
         super(props);
 
 		this.state = { 
-			from: new Date(Date.now() - 60 * 60 * 1000 * 12),
+			from: new Date(Date.now() - 24 * 60 * 60 * 1000),
 			to: new Date(),
 		 } as IPatientHeartRateState;
 
@@ -55,7 +54,6 @@ class PatientHeartRateComponent extends React.Component<IPatientHeartRateProps, 
 	}
 
     render() {
-		console.log(ticks);
         return (
 			<Container>
 				<Form>
@@ -71,12 +69,12 @@ class PatientHeartRateComponent extends React.Component<IPatientHeartRateProps, 
 				<FlexibleWidthXYPlot 
 					height={500}
 					xDomain={[this.state.from, this.state.to]}
+					yDomain={[0, 220]}
 				>
 					<HorizontalGridLines style={{stroke: '#B7E9ED'}} />
 					<VerticalGridLines style={{stroke: '#B7E9ED'}} />
 					<XAxis 
 						tickFormat={v => format(+v, 'H:MM')} 
-						tickValues={ticks}
 						style={{
 							line: {stroke: '#ADDDE1'},
 							ticks: {stroke: '#ADDDE1'},

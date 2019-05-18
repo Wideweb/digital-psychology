@@ -4,14 +4,14 @@ import styled from 'styled-components';
 import { FlexibleWidthXYPlot, VerticalGridLines, HorizontalGridLines, XAxis, YAxis, VerticalBarSeries, LabelSeries } from 'react-vis';
 import { PatientCall } from '../types';
 
-interface IPatientListProps {
+interface IPatientCallProps {
     data: Array<PatientCall>;
 }
 
 const Container = styled.div`
 `;
 
-class PatientCallsComponent extends React.Component<IPatientListProps> {
+class PatientCallsComponent extends React.Component<IPatientCallProps> {
     render() {
         return (
 			<Container>

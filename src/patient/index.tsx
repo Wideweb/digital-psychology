@@ -8,6 +8,7 @@ import { Patient } from './types';
 import PatientCallsComponent from './components/patient-calls';
 import PatientMessagesComponent from './components/patient-messages';
 import PatientHeartRateComponent from './components/patient-heart-rate';
+import PatientGPSComponent from './components/patient-gps';
 import PatientPanelComponent from './components/patient-panel';
 
 interface IPatientProps {
@@ -72,6 +73,7 @@ const TABS = {
 	CALLS: 'calls',
 	MESSAGES: 'messages',
 	HEART_RATE: 'heart-rate',
+	GPS: 'gps',
 }
 
 class PatientComponent extends React.Component<IPatientProps, IPatientState> {
@@ -103,6 +105,7 @@ class PatientComponent extends React.Component<IPatientProps, IPatientState> {
 						{this._renderTab(TABS.CALLS, 'Calls')}
 						{this._renderTab(TABS.MESSAGES, 'Messages')}
 						{this._renderTab(TABS.HEART_RATE, 'Heart Rate')}
+						{this._renderTab(TABS.GPS, 'GPS')}
 					</Tabs>
 					<TabBody>
 						{this._renderTabBody(this.state.tab)}
@@ -131,6 +134,8 @@ class PatientComponent extends React.Component<IPatientProps, IPatientState> {
 				return <PatientMessagesComponent data={this.props.patient.messages}></PatientMessagesComponent>;
 			case TABS.HEART_RATE: 
 				return <PatientHeartRateComponent data={this.props.patient.heartRate}></PatientHeartRateComponent>;
+			case TABS.GPS: 
+				return <PatientGPSComponent data={this.props.patient.gps}></PatientGPSComponent>;
 			default:
 				return <React.Fragment></React.Fragment>;
 		}

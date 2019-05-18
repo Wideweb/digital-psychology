@@ -13,12 +13,18 @@ export class PatientHeartRate {
     date: number;
 }
 
+export class PatientLocation {
+	lat: number;
+    lng: number;
+}
+
 export class Patient {
     id: number;
     name: string;
     calls: Array<PatientCall>;
 	messages: Array<PatientMessage>;
 	heartRate: Array<PatientHeartRate>;
+	gps: Array<PatientLocation>;
 
     constructor() {
         this.calls = [];

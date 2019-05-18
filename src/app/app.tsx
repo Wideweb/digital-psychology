@@ -28,7 +28,11 @@ const store = createStore(
 );
 sagaMiddleware.run(sagas);
 
-export interface AppProps { }
+export interface IAppProps { }
+
+export interface IAppState {
+	location: string;
+}
 
 const Container = styled.div`
     height: 100%;
@@ -38,15 +42,18 @@ const Container = styled.div`
     grid-template-rows: 60px 1fr 40px;
 `;
 
-class AppComponent extends React.Component<AppProps, {}> {
-    constructor(props: AppProps) {
+class AppComponent extends React.Component<IAppProps, IAppState> {
+    constructor(props: IAppProps) {
         super(props);
+
+		this.state = { location: '/' } as IAppState;
 
         this._openPage = this._openPage.bind(this);
     }
 
-    _openPage(to) {
-        history.push(to);
+    _openPage(location) {
+		this.setState({ location })
+        history.push(location);
     }
 
     render() {
@@ -55,7 +62,7 @@ class AppComponent extends React.Component<AppProps, {}> {
                 <Router history={history}>
                     <Container>
                         <HeaderComponent onOpen={this._openPage}></HeaderComponent>
-                        <AsideComponent onOpen={this._openPage} location={history.location.pathname}></AsideComponent>
+                        <AsideComponent onOpen={this._openPage} location={this.state.location}></AsideComponent>
                         <BodyComponent></BodyComponent>
                         <FooterComponent></FooterComponent>
                     </Container>

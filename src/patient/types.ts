@@ -8,11 +8,17 @@ export class PatientMessage {
     date: number;
 }
 
+export class PatientHeartRate {
+	num: number;
+    date: number;
+}
+
 export class Patient {
     id: number;
     name: string;
     calls: Array<PatientCall>;
-    messages: Array<PatientMessage>;
+	messages: Array<PatientMessage>;
+	heartRate: Array<PatientHeartRate>;
 
     constructor() {
         this.calls = [];

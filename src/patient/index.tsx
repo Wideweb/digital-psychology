@@ -104,7 +104,6 @@ class PatientComponent extends React.Component<IPatientProps, IPatientState> {
 					<Tabs>
 						{this._renderTab(TABS.CALLS, 'Calls')}
 						{this._renderTab(TABS.MESSAGES, 'Messages')}
-						{this._renderTab(TABS.HEART_RATE, 'Heart Rate')}
 						{this._renderTab(TABS.GPS, 'GPS')}
 					</Tabs>
 					<TabBody>

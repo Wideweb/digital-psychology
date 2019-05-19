@@ -60,6 +60,8 @@ const BodyRow = styled.div`
 	&:not(:last-child) {
 		border-bottom: 1px solid gray;
 	}
+
+	background: ${props => props.data.mentalState === 'Depression' ? '#F0E68C' : 'none'};
 `;
 
 const BodyCell = styled.div`
@@ -90,15 +92,17 @@ class PatientListComponent extends React.Component<IPatientListProps> {
 						<HeaderCell>Patient Name</HeaderCell>
 						<HeaderCell>Age</HeaderCell>
 						<HeaderCell>Sex</HeaderCell>
+						<HeaderCell>Mental state</HeaderCell>
 					</HeaderRow>
 				</Header>
 				<Body>
 					{patients.map((patient) => 
-						<BodyRow key={patient.id} onClick={() => this._openPatient(patient)}>
+						<BodyRow data={patient} key={patient.id} onClick={() => this._openPatient(patient)}>
 							<BodyCell>{patient.number}</BodyCell>
 							<BodyCell>{patient.name}</BodyCell>
 							<BodyCell>{patient.age}</BodyCell>
 							<BodyCell>{patient.sex}</BodyCell>
+							<BodyCell>{patient.mentalState}</BodyCell>
 						</BodyRow>
 					)}
 				</Body>

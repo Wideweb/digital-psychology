@@ -4,6 +4,7 @@ export class PatientListItem {
     name: string;
 	age: number
 	sex: string;
+	mentalState: string;
 }
 
 export interface PatientsState {

@@ -43,7 +43,7 @@ const Label = styled.div`
 
 const LocationPanel = styled.div`
 	height: 100%;
-	width: 200px;
+	width: 220px;
 	display: flex;
 	flex-direction: column;
 	box-sizing: border-box;
@@ -84,24 +84,74 @@ const mapData = {
 	zoom: 13,
 };
 
+const ONE_DAY = 86400000;
+
 const locaitions = [
-	{
-		title: 'Work',
-		coordinates: [53.904278, 27.532528],
-		from: new Date(),
-		to: new Date(),
-	},
 	{
 		title: 'Home',
 		coordinates: [53.899414, 27.523096],
-		from: new Date(),
-		to: new Date(),
+		from: new Date(2019, 4, 17, 19, 25),
+		to: null,
 	},
 	{
 		title: 'Shop',
 		coordinates: [53.908018, 27.527318],
-		from: new Date(),
-		to: new Date(),
+		from: new Date(2019, 4, 17, 18, 40),
+		to: new Date(2019, 4, 17, 19, 10),
+	},
+	{
+		title: 'Work',
+		coordinates: [53.904278, 27.532528],
+		from: new Date(2019, 4, 17, 10, 0),
+		to: new Date(2019, 4, 17, 18, 30),
+	},
+	{
+		title: 'Home',
+		coordinates: [53.899414, 27.523096],
+		from: new Date(2019, 4, 16, 18, 50),
+		to: new Date(2019, 4, 17, 9, 40),
+	},
+	{
+		title: 'Work',
+		coordinates: [53.904278, 27.532528],
+		from: new Date(2019, 4, 16, 10, 0),
+		to: new Date(2019, 4, 16, 18, 30),
+	},
+	{
+		title: 'Home',
+		coordinates: [53.899414, 27.523096],
+		from: new Date(2019, 4, 15, 18, 50),
+		to: new Date(2019, 4, 16, 9, 40),
+	},
+	{
+		title: 'Work',
+		coordinates: [53.904278, 27.532528],
+		from: new Date(2019, 4, 15, 10, 0),
+		to: new Date(2019, 4, 15, 18, 30),
+	},
+	{
+		title: 'Home',
+		coordinates: [53.899414, 27.523096],
+		from: new Date(2019, 4, 14, 19, 25),
+		to: new Date(2019, 4, 15, 9, 40),
+	},
+	{
+		title: 'Shop',
+		coordinates: [53.908018, 27.527318],
+		from: new Date(2019, 4, 14, 18, 40),
+		to: new Date(2019, 4, 14, 19, 10),
+	},
+	{
+		title: 'Work',
+		coordinates: [53.904278, 27.532528],
+		from: new Date(2019, 4, 14, 10, 0),
+		to: new Date(2019, 4, 14, 18, 30),
+	},
+	{
+		title: 'Home',
+		coordinates: [53.899414, 27.523096],
+		from: new Date(2019, 4, 14, 18, 50),
+		to: new Date(2019, 4, 13, 9, 40),
 	},
 ];
 
@@ -111,8 +161,8 @@ class PatientGPSComponent extends React.Component<IPatientGPSProps, IPatientGPSS
         super(props);
 
 		this.state = { 
-			from: new Date(Date.now() - 24 * 60 * 60 * 1000),
-			to: new Date(),
+			from: new Date(2019, 5, 13),
+			to: new Date(2019, 5, 17),
 		 } as IPatientGPSState;
 
 		 this.setFrom = this.setFrom.bind(this);
@@ -146,7 +196,7 @@ class PatientGPSComponent extends React.Component<IPatientGPSProps, IPatientGPSS
 						{locaitions.map((item, idx) =>
 							<LocationItem key={idx}>
 								<LocationItemTitle>{item.title}</LocationItemTitle>
-								<LocationItemDate>{format(item.from, 'dd mmm HH:MM')} - {format(item.to, 'dd mmm HH:MM')}</LocationItemDate>
+								<LocationItemDate>{format(item.from, 'dd mmm HH:MM')}{item.to ? ` - ${ format(item.to, 'dd mmm HH:MM')}` : ''}</LocationItemDate>
 							</LocationItem>
 						)}
 					</LocationList>

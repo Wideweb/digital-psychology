@@ -16,7 +16,7 @@ const Container = styled.div`
     border-right: 1px solid #333;
 `;
 
-const Avatar = styled.div`
+const Avatar = styled.img`
     height: 100px;
     width: 100px;
     border-radius: 50%;
@@ -29,12 +29,18 @@ const Name = styled.div`
     align-self: center;
 `;
 
+const MentalState = styled.div`
+	align-self: center;
+	padding: 10px;
+`;
+
 class PatientPanelComponent extends React.Component<IPatientPanelProps> {
     render() {
         return (
             <Container>
-                <Avatar></Avatar>
-                <Name>{this.props.data.name}</Name>
+                <Avatar src={require("../../../assets/patient.jpg")}></Avatar>
+                <Name>{this.props.data.name}, {this.props.data.age}</Name>
+                <MentalState>{this.props.data.mentalState}</MentalState>
             </Container>
         );
     }

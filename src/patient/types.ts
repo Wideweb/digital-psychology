@@ -20,7 +20,10 @@ export class PatientLocation {
 
 export class Patient {
     id: number;
-    name: string;
+	name: string;
+	img: string;
+	age: number;
+	mentalState: string;
     calls: Array<PatientCall>;
 	messages: Array<PatientMessage>;
 	heartRate: Array<PatientHeartRate>;

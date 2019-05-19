@@ -58,8 +58,7 @@ class HeaderComponent extends React.Component<HeaderProps, {}> {
                     <li></li>
                 </MenuLeft>
                 <MenuRight>
-                    <Link onClick={() => this._open('/login')}>Login</Link>
-                    <Link onClick={() => this._open('/sign-in')}>Sign In</Link>
+                    <Link onClick={() => this._open('/')}>Hi, Dr. Alex</Link>
                 </MenuRight>
             </Container>
         )

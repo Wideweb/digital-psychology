@@ -6,6 +6,7 @@ import {
 } from './reducers/patient';
 import { Patient } from './types';
 import PatientCallsComponent from './components/patient-calls';
+import PatientDetailComponent from './components/patient-detail';
 import PatientMessagesComponent from './components/patient-messages';
 import PatientHeartRateComponent from './components/patient-heart-rate';
 import PatientGPSComponent from './components/patient-gps';
@@ -70,6 +71,7 @@ const TabBody = styled.div`
 `;
 
 const TABS = {
+	DETAIL: 'detail',
 	CALLS: 'calls',
 	MESSAGES: 'messages',
 	HEART_RATE: 'heart-rate',
@@ -102,6 +104,7 @@ class PatientComponent extends React.Component<IPatientProps, IPatientState> {
 				<PatientPanelComponent data={this.props.patient}></PatientPanelComponent>
 				<Details>
 					<Tabs>
+						{this._renderTab(TABS.DETAIL, 'Detail')}
 						{this._renderTab(TABS.CALLS, 'Calls')}
 						{this._renderTab(TABS.MESSAGES, 'Messages')}
 						{this._renderTab(TABS.GPS, 'GPS')}
@@ -127,7 +130,9 @@ class PatientComponent extends React.Component<IPatientProps, IPatientState> {
 
 	_renderTabBody(tab) {
 		switch(tab) {
-			case TABS.CALLS: 
+			case TABS.DETAIL: 
+                return <PatientDetailComponent data={this.props.patient}></PatientDetailComponent>;
+            case TABS.CALLS: 
 				return <PatientCallsComponent data={this.props.patient.calls}></PatientCallsComponent>;
 			case TABS.MESSAGES: 
 				return <PatientMessagesComponent data={this.props.patient.messages}></PatientMessagesComponent>;

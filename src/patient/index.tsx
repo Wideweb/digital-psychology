@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Route } from 'react-router';
+import { Route, Redirect, Switch } from 'react-router';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import {
@@ -71,6 +71,10 @@ const TabBody = styled.div`
 	box-sizing: 20px;
 	padding: 20px;
 	overflow: auto;
+
+	& > * {
+		height: 100%;
+	}
 `;
 
 class PatientComponent extends React.Component<IPatientProps, IPatientState> {
@@ -98,10 +102,13 @@ class PatientComponent extends React.Component<IPatientProps, IPatientState> {
                         <NavLink to={`/patients/${this.state.id}/gps`} activeClassName='active'>GPS</NavLink>
 					</Tabs>
 					<TabBody>
-                        <Route exact path="/patients/:id/detail" component={PatientDetailComponent} />
-                        <Route exact path="/patients/:id/calls" component={PatientCallsComponent} />
-                        <Route exact path="/patients/:id/messages" component={PatientMessagesComponent} />
-                        <Route exact path="/patients/:id/gps" component={PatientGPSComponent} />
+						<Switch>
+							<Route exact path="/patients/:id/detail" component={PatientDetailComponent} />
+							<Route exact path="/patients/:id/calls" component={PatientCallsComponent} />
+							<Route exact path="/patients/:id/messages" component={PatientMessagesComponent} />
+							<Route exact path="/patients/:id/gps" component={PatientGPSComponent} />
+							<Redirect to={`/patients/:id/detail`} />
+						</Switch>
 					</TabBody>
 				</Details>
 			</Container>

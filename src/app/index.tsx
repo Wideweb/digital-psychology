@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import { Route } from 'react-router';
+import { Route, IndexRoute } from 'react-router';
 import { Switch } from 'react-router-dom';
 import createSagaMiddleware from 'redux-saga';
 import thunk from 'redux-thunk';
@@ -29,7 +29,11 @@ const store = createStore(
 sagaMiddleware.run(sagas);
 
 const Container = styled.div`
-    height: 100%;
+	height: 100%;
+	
+	> * {
+		height: 100%;
+	}
 `;
 
 class MainComponent extends React.Component {

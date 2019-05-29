@@ -1,17 +1,18 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 import format from 'dateformat';
 import DatePicker from 'react-datepicker';
 import styled from 'styled-components';
 import { PatientLocation } from '../types';
-import { YMaps, Map, Placemark, GeoObject } from 'react-yandex-maps';
+import { YMaps, Map, GeoObject } from 'react-yandex-maps';
 
 interface IPatientGPSProps {
-	data: Array<PatientLocation>;
-}
+    data: Array<PatientLocation>;
+};
 
 interface IPatientGPSState {
 	from: Date;
-	to: Date;
+    to: Date;
 }
 
 const Container = styled.div`
@@ -84,78 +85,6 @@ const mapData = {
 	zoom: 13,
 };
 
-const ONE_DAY = 86400000;
-
-const locaitions = [
-	{
-		title: 'Home',
-		coordinates: [53.899414, 27.523096],
-		from: new Date(2019, 4, 17, 19, 25),
-		to: null,
-	},
-	{
-		title: 'Shop',
-		coordinates: [53.908018, 27.527318],
-		from: new Date(2019, 4, 17, 18, 40),
-		to: new Date(2019, 4, 17, 19, 10),
-	},
-	{
-		title: 'Work',
-		coordinates: [53.904278, 27.532528],
-		from: new Date(2019, 4, 17, 10, 0),
-		to: new Date(2019, 4, 17, 18, 30),
-	},
-	{
-		title: 'Home',
-		coordinates: [53.899414, 27.523096],
-		from: new Date(2019, 4, 16, 18, 50),
-		to: new Date(2019, 4, 17, 9, 40),
-	},
-	{
-		title: 'Work',
-		coordinates: [53.904278, 27.532528],
-		from: new Date(2019, 4, 16, 10, 0),
-		to: new Date(2019, 4, 16, 18, 30),
-	},
-	{
-		title: 'Home',
-		coordinates: [53.899414, 27.523096],
-		from: new Date(2019, 4, 15, 18, 50),
-		to: new Date(2019, 4, 16, 9, 40),
-	},
-	{
-		title: 'Work',
-		coordinates: [53.904278, 27.532528],
-		from: new Date(2019, 4, 15, 10, 0),
-		to: new Date(2019, 4, 15, 18, 30),
-	},
-	{
-		title: 'Home',
-		coordinates: [53.899414, 27.523096],
-		from: new Date(2019, 4, 14, 19, 25),
-		to: new Date(2019, 4, 15, 9, 40),
-	},
-	{
-		title: 'Shop',
-		coordinates: [53.908018, 27.527318],
-		from: new Date(2019, 4, 14, 18, 40),
-		to: new Date(2019, 4, 14, 19, 10),
-	},
-	{
-		title: 'Work',
-		coordinates: [53.904278, 27.532528],
-		from: new Date(2019, 4, 14, 10, 0),
-		to: new Date(2019, 4, 14, 18, 30),
-	},
-	{
-		title: 'Home',
-		coordinates: [53.899414, 27.523096],
-		from: new Date(2019, 4, 14, 18, 50),
-		to: new Date(2019, 4, 13, 9, 40),
-	},
-];
-
-
 class PatientGPSComponent extends React.Component<IPatientGPSProps, IPatientGPSState> {
 	constructor(props: IPatientGPSProps) {
         super(props);
@@ -193,7 +122,7 @@ class PatientGPSComponent extends React.Component<IPatientGPSProps, IPatientGPSS
 					</Form>
 					<LocationListName>Chronology</LocationListName>
 					<LocationList>
-						{locaitions.map((item, idx) =>
+						{this.props.data.map((item, idx) =>
 							<LocationItem key={idx}>
 								<LocationItemTitle>{item.title}</LocationItemTitle>
 								<LocationItemDate>{format(item.from, 'dd mmm HH:MM')}{item.to ? ` - ${ format(item.to, 'dd mmm HH:MM')}` : ''}</LocationItemDate>
@@ -204,7 +133,7 @@ class PatientGPSComponent extends React.Component<IPatientGPSProps, IPatientGPSS
 				<MapContainer>
 					<YMaps style={{ width: '100%', height: '100%' }}>
 						<Map style={{ width: '100%', height: '100%' }} defaultState={mapData}>
-							{locaitions.map((point, idx) => 
+							{this.props.data.map((point, idx) => 
 								<GeoObject
 									key={idx}
 									geometry={{
@@ -228,4 +157,10 @@ class PatientGPSComponent extends React.Component<IPatientGPSProps, IPatientGPSS
 	}
 }
 
-export default PatientGPSComponent;
+const mapStateToProps = (state) => {
+	return {
+		data: state.patient.data.gps,
+	};
+};
+
+export default connect(mapStateToProps)(PatientGPSComponent);

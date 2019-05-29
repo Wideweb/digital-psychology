@@ -1,10 +1,14 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Patient } from '../types';
+import format from 'dateformat';
 
 interface IPatientDetailProps {
-	data: Patient;
+    data: Patient;
 }
+
+interface IPatientDetailState {}
 
 const Form = styled.form`
     height: 100%;
@@ -43,7 +47,7 @@ const Value = styled.div`
     color: black;
 `;
 
-class PatientCallsComponent extends React.Component<IPatientDetailProps> {
+class PatientDetailComponent extends React.Component<IPatientDetailProps, IPatientDetailState> {
 	render() {
 		return (
 			<Form>
@@ -52,37 +56,37 @@ class PatientCallsComponent extends React.Component<IPatientDetailProps> {
                     <Row>
                         <Field>
                             <Label>Country</Label>
-                            <Value>Belarus</Value>
+                            <Value>{this.props.data.country}</Value>
                         </Field>
                         <Field>
                             <Label>Preferred Language</Label>
-                            <Value>Russian</Value>
+                            <Value>{this.props.data.preferredLanguage}</Value>
                         </Field>
                     </Row>
                     <Row>
                         <Field>
                             <Label>Address 1</Label>
-                            <Value>Timoshenko 12/91</Value>
+                            <Value>{this.props.data.address1}</Value>
                         </Field>
                         <Field>
                             <Label>Address 2</Label>
-                            <Value>Kupriyanova 7</Value>
+                            <Value>{this.props.data.address2}</Value>
                         </Field>
                     </Row>
                     <Row>
                         <Field>
                             <Label>City</Label>
-                            <Value>Minsk</Value>
+                            <Value>{this.props.data.country}</Value>
                         </Field>
                         <Field>
                             <Label>ZIP/Postal Code</Label>
-                            <Value>220040</Value>
+                            <Value>{this.props.data.zip}</Value>
                         </Field>
                     </Row>
                     <Row>
                         <Field>
                             <Label>Email</Label>
-                            <Value>alckevich@live.com</Value>
+                            <Value>{this.props.data.email}</Value>
                         </Field>
                     </Row>
                 </Section>
@@ -91,11 +95,11 @@ class PatientCallsComponent extends React.Component<IPatientDetailProps> {
                     <Row>
                         <Field>
                             <Label>Diagnosis</Label>
-                            <Value>Depression</Value>
+                            <Value>{this.props.data.diagnosis}</Value>
                         </Field>
                         <Field>
                             <Label>Diagnosis Date</Label>
-                            <Value>17 May 2019</Value>
+                            <Value>{format(this.props.data.diagnosisDate, 'dd mmm yyyy')}</Value>
                         </Field>
                     </Row>
                 </Section>
@@ -104,4 +108,10 @@ class PatientCallsComponent extends React.Component<IPatientDetailProps> {
 	}
 }
 
-export default PatientCallsComponent;
+const mapStateToProps = (state) => {
+	return {
+		data: state.patient.data,
+	};
+};
+
+export default connect(mapStateToProps)(PatientDetailComponent);

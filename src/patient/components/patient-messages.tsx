@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 import format from 'dateformat';
 import { FlexibleWidthXYPlot, VerticalGridLines, HorizontalGridLines, XAxis, YAxis, VerticalBarSeries } from 'react-vis';
 import { PatientMessage } from '../types';
@@ -154,4 +155,10 @@ class PatientMessagesComponent extends React.Component<IPatienMessagesProps, IPa
 	}
 }
 
-export default PatientMessagesComponent;
+const mapStateToProps = (state) => {
+	return {
+		data: state.patient.data.messages,
+	};
+};
+
+export default connect(mapStateToProps)(PatientMessagesComponent);

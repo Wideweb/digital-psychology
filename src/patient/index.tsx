@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { Route } from 'react-router';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import {
 	getPatient,
@@ -21,7 +23,7 @@ interface IPatientProps {
 }
 
 interface IPatientState {
-	tab: null;
+	id: any;
 }
 
 const Container = styled.div`
@@ -44,23 +46,24 @@ const Tabs = styled.div`
 	flex-direction: row;
 	background: #2f343b;
 	box-sizing: border-box;
-	padding: 10px 0 0 0;
-`;
+    padding: 10px 0 0 0;
+    
+    a {
+        box-sizing: border-box;
+        padding: 10px 20px;
+        cursor: pointer;
+        background: darkcyan;
+        margin: 0 5px 0 0;
+        color: black;
 
-const Tab = styled.div`
-	box-sizing: border-box;
-	padding: 10px 20px;
-	cursor: pointer;
-	background: darkcyan;
-	margin: 0 5px 0 0;
+        &:hover {
+            background: #e6604c;
+        }
 
-	&:hover {
-		background: #e6604c;
-	}
-
-	&.active {
-		background: white;
-	}
+        &.active {
+            background: white;
+        }
+    }
 `;
 
 const TabBody = styled.div`
@@ -70,32 +73,17 @@ const TabBody = styled.div`
 	overflow: auto;
 `;
 
-const TABS = {
-	DETAIL: 'detail',
-	CALLS: 'calls',
-	MESSAGES: 'messages',
-	HEART_RATE: 'heart-rate',
-	GPS: 'gps',
-}
-
 class PatientComponent extends React.Component<IPatientProps, IPatientState> {
 	constructor(props: IPatientProps) {
         super(props);
 
-		this.state = { tab: TABS.CALLS } as IPatientState;
-	}
-	
+		this.state = { id: null } as IPatientState;
+    }
+
 	componentDidMount() {
 		const { id } = this.props.match.params;
-		this.props.getPatient(id);
-	}
-
-	_selectTab(tab) {
-		this.setState({ tab });
-	}
-
-	_isActiveTab(tab) {
-		return tab === this.state.tab;
+        this.props.getPatient(id);
+        this.setState({ id });
 	}
 
 	render() {
@@ -104,46 +92,21 @@ class PatientComponent extends React.Component<IPatientProps, IPatientState> {
 				<PatientPanelComponent data={this.props.patient}></PatientPanelComponent>
 				<Details>
 					<Tabs>
-						{this._renderTab(TABS.DETAIL, 'Detail')}
-						{this._renderTab(TABS.CALLS, 'Calls')}
-						{this._renderTab(TABS.MESSAGES, 'Messages')}
-						{this._renderTab(TABS.GPS, 'GPS')}
+                        <NavLink to={`/patients/${this.state.id}/detail`} activeClassName='active'>Detail</NavLink>
+                        <NavLink to={`/patients/${this.state.id}/calls`} activeClassName='active'>Calls</NavLink>
+                        <NavLink to={`/patients/${this.state.id}/messages`} activeClassName='active'>Messages</NavLink>
+                        <NavLink to={`/patients/${this.state.id}/gps`} activeClassName='active'>GPS</NavLink>
 					</Tabs>
 					<TabBody>
-						{this._renderTabBody(this.state.tab)}
+                        <Route exact path="/patients/:id/detail" component={PatientDetailComponent} />
+                        <Route exact path="/patients/:id/calls" component={PatientCallsComponent} />
+                        <Route exact path="/patients/:id/messages" component={PatientMessagesComponent} />
+                        <Route exact path="/patients/:id/gps" component={PatientGPSComponent} />
 					</TabBody>
 				</Details>
 			</Container>
 		);
-	}
-
-	_renderTab(key, label){
-		return (
-			<Tab
-				className={(this._isActiveTab(key) ? 'active' : '')}
-				onClick={() => this._selectTab(key)}
-			>
-				{label}
-			</Tab>
-		);
-	}
-
-	_renderTabBody(tab) {
-		switch(tab) {
-			case TABS.DETAIL: 
-                return <PatientDetailComponent data={this.props.patient}></PatientDetailComponent>;
-            case TABS.CALLS: 
-				return <PatientCallsComponent data={this.props.patient.calls}></PatientCallsComponent>;
-			case TABS.MESSAGES: 
-				return <PatientMessagesComponent data={this.props.patient.messages}></PatientMessagesComponent>;
-			case TABS.HEART_RATE: 
-				return <PatientHeartRateComponent data={this.props.patient.heartRate}></PatientHeartRateComponent>;
-			case TABS.GPS: 
-				return <PatientGPSComponent data={this.props.patient.gps}></PatientGPSComponent>;
-			default:
-				return <React.Fragment></React.Fragment>;
-		}
-	}
+	};
 }
 
 const mapStateToProps = (state) => {

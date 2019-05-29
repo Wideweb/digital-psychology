@@ -1,9 +1,7 @@
 import * as React from 'react';
 import { Route } from 'react-router';
-import { Switch } from 'react-router-dom';
 import styled from 'styled-components';
 
-import AuthComponent from '../../auth';
 import PatientsComponent from '../../patients';
 import PatientComponent from '../../patient';
 
@@ -18,12 +16,9 @@ class BodyComponent extends React.Component<BodyProps, {}> {
     render() {
         return (
             <Container>
-                <Switch>
-                    <Route exact path="/" />
-                    <Route exact path="/login" component={AuthComponent} />
-                    <Route exact path="/patients" component={PatientsComponent} />
-                    <Route exact path="/patients/:id" component={PatientComponent} />
-                </Switch>
+                <Route exact path="/" />
+                <Route exact path="/patients" component={PatientsComponent} />
+                <Route path="/patients/:id" component={PatientComponent} />
             </Container>
         )
     }

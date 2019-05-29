@@ -40,9 +40,9 @@ class LoginComponent extends React.Component<ILoginComponentProps, ILoginCompone
     render() {
         return (
             <div>
-                <head>
+                <div>
                     Login
-                </head>
+                </div>
                 <form onSubmit={this.handleSubmit}>
                     <ul>
                         <li>

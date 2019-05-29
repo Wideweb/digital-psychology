@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 import format from 'dateformat';
 import DatePicker from 'react-datepicker';
 import styled from 'styled-components';
@@ -6,12 +7,12 @@ import { FlexibleWidthXYPlot, VerticalGridLines, HorizontalGridLines, XAxis, YAx
 import { PatientCall } from '../types';
 
 interface IPatientCallProps {
-	data: Array<PatientCall>;
+    data: Array<PatientCall>;
 }
 
 interface IPatientCallState {
 	from: Date;
-	to: Date;
+    to: Date;
 }
 
 const Container = styled.div`
@@ -154,4 +155,10 @@ class PatientCallsComponent extends React.Component<IPatientCallProps, IPatientC
 	}
 }
 
-export default PatientCallsComponent;
+const mapStateToProps = (state) => {
+	return {
+		data: state.patient.data.calls,
+	};
+};
+
+export default connect(mapStateToProps)(PatientCallsComponent);

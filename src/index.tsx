@@ -2,9 +2,9 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import reset from 'styled-reset';
 import { createGlobalStyle } from 'styled-components';
-import "react-datepicker/dist/react-datepicker.css";
+import 'react-datepicker/dist/react-datepicker.css';
 
-import App from "./app/app";
+import App from './app';
 
 const GlobalStyle = createGlobalStyle`
     ${reset}
@@ -31,4 +31,4 @@ const Index = () => {
     );
 };
 
-ReactDOM.render(<Index />, document.getElementById("index"));
+ReactDOM.render(<Index />, document.getElementById('index'));

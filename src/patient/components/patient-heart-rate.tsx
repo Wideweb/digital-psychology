@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 import DatePicker from 'react-datepicker';
 import format from 'dateformat';
 import styled from 'styled-components';
@@ -94,4 +95,10 @@ class PatientHeartRateComponent extends React.Component<IPatientHeartRateProps, 
     }
 }
 
-export default PatientHeartRateComponent;
+const mapStateToProps = (state) => {
+	return {
+		data: state.patient.data.heartRate,
+	};
+};
+
+export default connect(mapStateToProps)(PatientHeartRateComponent);

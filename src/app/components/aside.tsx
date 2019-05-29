@@ -1,10 +1,8 @@
 import * as React from 'react';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
-interface AsideProps {
-	onOpen: Function;
-	location: string;
-};
+interface AsideProps {};
 
 const Container = styled.aside`
     grid-area: aside;
@@ -12,50 +10,32 @@ const Container = styled.aside`
     display: flex;
     flex-direction: column;
     overflow: auto;
-`;
 
-const Link = styled.a`
-    color: white;
-	background-color: #2f343b;
-	text-transform: uppercase;
-    padding: 10px;
-    cursor: pointer;
-    &:hover {
-        background: #e6604c;
-    }
-    &.active {
-        background: #e6604c;
+    a {
+        color: white;
+        background-color: #2f343b;
+        text-transform: uppercase;
+        padding: 10px;
+        cursor: pointer;
+        &:hover {
+            background: #e6604c;
+        }
+        &.active {
+            background: #e6604c;
+        }
     }
 `;
 
 class AsideComponent extends React.Component<AsideProps, {}> {
-    _open(to) {
-        this.props.onOpen(to);
-	}
-	
-	_isActive(path) {
-		return path === this.props.location;
-	}
 
     render() {
         return (
             <Container>
-				{this._renderLink('/', 'Home')}
-				{this._renderLink('/patients', 'Patients')}
-				{this._renderLink('/settings', 'Settings')}
+                <NavLink exact to={'/'} activeClassName='active'>Home</NavLink>
+                <NavLink to={'/patients'} activeClassName='active'>Patients</NavLink>
+                <NavLink to={'/settings'} activeClassName='active'>Settings</NavLink>
             </Container>
         )
-	}
-	
-	_renderLink(path, label) {
-		return (
-			<Link 
-				className={(this._isActive(path) ? 'active' : '')}
-				onClick={() => this._open(path)}
-			>
-				{label}
-			</Link>
-		);
 	}
 }
 

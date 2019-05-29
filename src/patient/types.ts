@@ -14,16 +14,29 @@ export class PatientHeartRate {
 }
 
 export class PatientLocation {
-	lat: number;
-    lng: number;
+    title: string;
+    coordinates: Array<number>;
+    from: Date;
+    to: Date;
 }
 
 export class Patient {
     id: number;
-	name: string;
+    name: string;
 	img: string;
 	age: number;
-	mentalState: string;
+    mentalState: string;
+    
+    country: string;
+    preferredLanguage: string;
+    address1: string;
+    address2: string;
+    city: string;
+    zip: string;
+    email: string;
+    diagnosis: string;
+    diagnosisDate: Date;
+	
     calls: Array<PatientCall>;
 	messages: Array<PatientMessage>;
 	heartRate: Array<PatientHeartRate>;
@@ -32,6 +45,7 @@ export class Patient {
     constructor() {
         this.calls = [];
         this.messages = [];
+        this.gps = [];
     }
 }
 

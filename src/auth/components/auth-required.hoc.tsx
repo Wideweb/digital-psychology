@@ -32,9 +32,9 @@ export default function requiresAuth(WrappedComponent) {
         render() {
             return (
                 <div>
-                    {this.props.user 
+                    {!this.props.user 
                         ? <WrappedComponent {...this.props} /> 
-                        : <Redirect to={{ pathname: "/login" }}/>}
+                        : <Redirect to={{ pathname: '/login' }}/>}
                 </div>
             );
         }

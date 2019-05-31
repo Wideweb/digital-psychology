@@ -2,7 +2,9 @@ import * as React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
-interface AsideProps {};
+interface AsideProps {
+    baseUrl: string;
+};
 
 const Container = styled.aside`
     grid-area: aside;
@@ -31,12 +33,12 @@ class AsideComponent extends React.Component<AsideProps, {}> {
     render() {
         return (
             <Container>
-                <NavLink exact to={'/'} activeClassName='active'>Home</NavLink>
-                <NavLink to={'/patients'} activeClassName='active'>Patients</NavLink>
-                <NavLink to={'/settings'} activeClassName='active'>Settings</NavLink>
+                <NavLink exact to={this.props.baseUrl} activeClassName='active'>Home</NavLink>
+                <NavLink to={`${this.props.baseUrl}/patients`} activeClassName='active'>Patients</NavLink>
+                <NavLink to={`${this.props.baseUrl}/settings`} activeClassName='active'>Settings</NavLink>
             </Container>
         )
-	}
+    }
 }
 
 export default AsideComponent;

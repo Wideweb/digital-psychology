@@ -5,7 +5,9 @@ import styled from 'styled-components';
 import PatientsComponent from '../../patients';
 import PatientComponent from '../../patient';
 
-interface BodyProps {};
+interface BodyProps {
+    baseUrl: string;
+};
 
 const Container = styled.main`
     grid-area: body;
@@ -16,9 +18,9 @@ class BodyComponent extends React.Component<BodyProps, {}> {
     render() {
         return (
             <Container>
-                <Route exact path="/" />
-                <Route exact path="/patients" component={PatientsComponent} />
-                <Route path="/patients/:id" component={PatientComponent} />
+                <Route exact path={`${this.props.baseUrl}`} />
+                <Route exact path={`${this.props.baseUrl}/patients`} component={PatientsComponent} />
+                <Route path={`${this.props.baseUrl}/patients/:id`} component={PatientComponent} />
             </Container>
         )
     }

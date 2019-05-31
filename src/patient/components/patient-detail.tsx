@@ -13,7 +13,6 @@ interface IPatientDetailState {}
 const Form = styled.form`
     height: 100%;
 	width: 100%;
-	margin: 0 0 15px 0;
 `;
 
 const Section = styled.div`

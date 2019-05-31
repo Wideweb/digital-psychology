@@ -96,18 +96,18 @@ class PatientComponent extends React.Component<IPatientProps, IPatientState> {
 				<PatientPanelComponent data={this.props.patient}></PatientPanelComponent>
 				<Details>
 					<Tabs>
-                        <NavLink to={`/patients/${this.state.id}/detail`} activeClassName='active'>Detail</NavLink>
-                        <NavLink to={`/patients/${this.state.id}/calls`} activeClassName='active'>Calls</NavLink>
-                        <NavLink to={`/patients/${this.state.id}/messages`} activeClassName='active'>Messages</NavLink>
-                        <NavLink to={`/patients/${this.state.id}/gps`} activeClassName='active'>GPS</NavLink>
+                        <NavLink to={`${this.props.match.url}/detail`} activeClassName='active'>Detail</NavLink>
+                        <NavLink to={`${this.props.match.url}/calls`} activeClassName='active'>Calls</NavLink>
+                        <NavLink to={`${this.props.match.url}/messages`} activeClassName='active'>Messages</NavLink>
+                        <NavLink to={`${this.props.match.url}/gps`} activeClassName='active'>GPS</NavLink>
 					</Tabs>
 					<TabBody>
 						<Switch>
-							<Route exact path="/patients/:id/detail" component={PatientDetailComponent} />
-							<Route exact path="/patients/:id/calls" component={PatientCallsComponent} />
-							<Route exact path="/patients/:id/messages" component={PatientMessagesComponent} />
-							<Route exact path="/patients/:id/gps" component={PatientGPSComponent} />
-							<Redirect to={`/patients/:id/detail`} />
+							<Route exact path={`${this.props.match.url}/detail`} component={PatientDetailComponent} />
+							<Route exact path={`${this.props.match.url}/calls`} component={PatientCallsComponent} />
+							<Route exact path={`${this.props.match.url}/messages`} component={PatientMessagesComponent} />
+							<Route exact path={`${this.props.match.url}/gps`} component={PatientGPSComponent} />
+							<Redirect to={`${this.props.match.url}/detail`} />
 						</Switch>
 					</TabBody>
 				</Details>

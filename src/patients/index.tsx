@@ -12,6 +12,7 @@ interface IPatientsProps {
     isLoading: boolean;
     isFail: boolean;
     history: any;
+    match: any;
 }
 
 const Container = styled.div`
@@ -55,7 +56,7 @@ class PatientsComponent extends React.Component<IPatientsProps, {}> {
     }
 
     _openPatient(patient) {
-        this.props.history.push(`/patients/${patient.id}`);
+        this.props.history.push(`${this.props.match.url}/${patient.id}`);
     }
 }
 

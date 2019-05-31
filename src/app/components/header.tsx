@@ -1,6 +1,8 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
+import { Dropdown, DropdownMenu, DropdownToggle } from '../../common/components/dropdown';
+
 interface HeaderProps {};
 
 const Container = styled.header`
@@ -44,6 +46,14 @@ const Link = styled.a`
     }
 `;
 
+const UserName = styled.a`
+    line-height: 60px;
+    color: white;
+    padding: 0 10px;
+    height: 100%;
+`;
+
+
 class HeaderComponent extends React.Component<HeaderProps, {}> {
 
     render() {
@@ -53,7 +63,16 @@ class HeaderComponent extends React.Component<HeaderProps, {}> {
                     <li></li>
                 </MenuLeft>
                 <MenuRight>
-                    <Link>Hi, Dr. Alex</Link>
+                    <Dropdown>
+                        <DropdownToggle>
+                            <UserName>
+                                <span>Hi, Dr. Alex</span>
+                            </UserName>
+                        </DropdownToggle>
+                        <DropdownMenu>
+                            <a>Log out</a>
+                        </DropdownMenu>
+                    </Dropdown>
                 </MenuRight>
             </Container>
         )

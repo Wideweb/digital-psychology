@@ -44,9 +44,9 @@ class MainComponent extends React.Component {
                 <Router history={history}>
                     <Container>
                         <Switch>
-                            <Route path='/' component={AppComponent} />
-                            <Route exact path='/login' component={LoginComponent} />
-                            <Route exact path='/sign-in' component={LoginComponent} />
+                            <Route path='/app' component={AppComponent} />
+                            <Route path='/login' component={LoginComponent} />
+                            <Route path='/sign-in' component={LoginComponent} />
                         </Switch>
                     </Container>
                 </Router>

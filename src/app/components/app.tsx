@@ -6,11 +6,11 @@ import AsideComponent from './aside';
 import BodyComponent from './body';
 import FooterComponent from './footer';
 
-
 import requiresAuth from '../../auth/components/auth-required.hoc';
 
 export interface IAppProps {
     auth: any;
+    match: any;
 }
 
 export interface IAppState { }
@@ -29,8 +29,8 @@ class AppComponent extends React.Component<IAppProps, IAppState> {
         return (
             <Layout>
                 <HeaderComponent></HeaderComponent>
-                <AsideComponent></AsideComponent>
-                <BodyComponent></BodyComponent>
+                <AsideComponent baseUrl={this.props.match.url}></AsideComponent>
+                <BodyComponent  baseUrl={this.props.match.url}></BodyComponent>
                 <FooterComponent></FooterComponent>
             </Layout>
         );
